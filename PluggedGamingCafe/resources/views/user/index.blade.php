@@ -34,25 +34,31 @@
                class="glyphicon  {{ Session::get('user_field')=='username'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
             </i>
         </th>
-        <th class="hidden-xs hidden-sm">Role</th>
+        <th class="hidden-xs hidden-sm">
+        <a href="javascript:ajaxLoad('user?field=role&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
+                Role
+            </a>
+            <i style="font-size: 12px"
+               class="glyphicon  {{ Session::get('user_field')=='role'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
+            </i>
+        </th>
         <th width="50" align="center">Active</th>
         <th class="hidden-xs hidden-sm">
-            <a href="javascript:ajaxLoad('user?field=firstname&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
-                First Name
+            <a href="javascript:ajaxLoad('user?field=fullname&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
+                Full Name
             </a>
             <i style="font-size: 12px"
-               class="glyphicon  {{ Session::get('user_field')=='firstname'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
+               class="glyphicon  {{ Session::get('user_field')=='fullname'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
             </i>
         </th>
         <th class="hidden-xs hidden-sm">
-            <a href="javascript:ajaxLoad('user?field=lastname&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
-                Last Name
+        <a href="javascript:ajaxLoad('user?field=contact&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
+                Contact No.
             </a>
             <i style="font-size: 12px"
-               class="glyphicon  {{ Session::get('user_field')=='lastname'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
+               class="glyphicon  {{ Session::get('user_field')=='contact'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-order':'glyphicon-sort-by-order-alt'):'' }}">
             </i>
         </th>
-        <th class="hidden-xs hidden-sm">Contact No.</th>
         <th width="140px"></th>
         
         
@@ -69,8 +75,7 @@
                 {!!$user->active?"<i  style='color:green' class='glyphicon glyphicon-ok'></i>":"<i style='color: red'
                                                                                                  class='glyphicon glyphicon-remove'></i>"!!}
             </td>
-            <td>{{$user->firstname}}</td>
-            <td>{{$user->lastname}}</td>
+            <td>{{$user->fullname}}</td>
             <td>{{$user->contact}}</td>
             <td style="text-align: center">
                 <a class="btn btn-primary btn-xs" title="Edit"

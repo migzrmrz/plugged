@@ -1,34 +1,20 @@
-<!--<center>
-    <img src="{{asset('images/logo.png')}}" height=80px" width="150px"/>
-    <h2 style="font-size:16px;margin:0">Plugged Board Cafe and Gaming Lounge</h2>
-    <i style="font-size:11px;width:90%;display:block">Address: 16 Legarda Road, Baguio City
-        Contact Number: 09178531817 </i>
-    <h3 style="padding: 0px;margin: 0px"></h3>
-</center> -->
-<hr style="size:2px;border:inset;margin-top: 0px;padding-top: 0px">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Options</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <tr>
+        
 <table style="width:100%;font-size:12px">
-    <tr>
-        <td width="80px" style="text-align:right">Id #:</td>
-        <td style="text-align:left">{{str_pad($order->id,6,0,0)}}</td>
-        <td style="width:60px;text-align:right">Date:</td>
-        <td style="text-align:left;width:100px">{{date("d-M-Y",strtotime($order->updated_at))}}</td>
-    </tr>
-    <tr>
-        <td width="80px" style="text-align:right">Table No:</td>
-        <td style="text-align:left">{{$order->table->name}}</td>
-        <td style="width:60px;text-align:right">Cashier:</td>
-        <td style="text-align:left;width:100px">{{ucwords(Auth::user()->username)}}</td>
-    </tr>
-    <tr>
-        <td width="80px" style="text-align:right">Customer:</td>
-        <td style="text-align:left">{{!empty($order->customer_id)&&$order->customer_id!='-1'?$order->customer->name:'General'}}</td>
-    </tr>
 </table>
 <table style="width:100%;margin-top:10px" border="0" cellspacing="0" cellpadding="2px">
     <tr style="font-size:13px">
         <th width="20px">No</th>
         <th>Description</th>
-        <th style="width:8%;text-align: center;">Qty</th>
+        <th style="width:8%;text-align: center;">Takeout</th>
+        <th style="width:8%;text-align: center;">Discount</th>
         
         {{--<th style="width:12%">D.C</th>--}}
         
@@ -43,7 +29,10 @@
         <tr style="font-size:11px;@if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
             <td align="center">{{$i++}}</td>
             <td align="center">{{$orderDetail->description}}</td>
-            <td align="center">{{$orderDetail->quantity}}</td>
+            <td align="center"><input type="checkbox" onchange="ajaxLoad('cashier/update-description/{{$orderDetail->id}} Takeout/'+this.value,)" style="width: 18px;height: 18px" value="{{$orderDetail->description}} (Takeout)"
+                             class="idRow"/></td>
+            <td align="center"><input type="checkbox" onchange="ajaxLoad('cashier/update-description/{{$orderDetail->id}} Takeout/'+this.value,)" style="width: 18px;height: 18px" value="{{$orderDetail->description}} (Takeout)"
+                             class="idRow"/></td>
             
             {{--<td align="center">{{$orderDetail->discount}}%</td>--}}
             <td align="right">
@@ -74,3 +63,8 @@
     //    window.print();
     //    window.close();
 </script>
+            
+
+        </tr>
+    </div>
+</div>

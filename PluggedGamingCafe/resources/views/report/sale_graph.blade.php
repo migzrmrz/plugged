@@ -43,7 +43,7 @@
             x: -20 //center
         },
         subtitle: {
-            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->username)}}',
+            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->fullname)}}',
             x: -20
         },
         xAxis: {

@@ -1,7 +1,7 @@
 @extends('layouts.cashier')
 @section('content')
     <div class="container-fluid" style="margin-top: 10px">
-        <div class="col-md-3" style="padding: 5px">
+        <div class="col-md-3" style="padding: 10px">
             @foreach($menuCategories as $menuCategory)
                 <div class="menu @if($menuCategory->id==(Session::has('menuCategory_id')?Session::get('menuCategory_id'):env('DEFAULT_MENU_CATEGORY'))) active  @endif"
                      onclick="$('.menu').removeClass('active');$(this).addClass('active');ajaxLoad('cashier/products?menuCategory_id={{$menuCategory->id}}','productList')">{{$menuCategory->name}}
@@ -17,7 +17,7 @@
                    onkeyup="ajaxLoad('cashier/products?search='+this.value,'productList')" value="Search..."/>
             <div id="productList">
                 <ul class="list-group"
-                    style="height: 525px; overflow-y: auto; border: 2px outset;background: white">
+                    style="height: 520px; overflow-y: auto; border: 2px outset;background: white">
                     @foreach(\App\Product::where('product_category_id',Session::get('menuCategory_id'))->orderBy('name')->get() as $menu)
                         <li class="list-group-item"
                             style="font-size: 16px;padding:0px;height: 80px"

@@ -65,7 +65,26 @@ class ReportController extends Controller
             ->where('order_details.deleted_at', NULL)
             ->groupBy(DB::raw("date(orders.created_at)"))
             ->first();
-        return view('report.daily_summary', ['orders' => $order, 'sale' => $sale]);
+            
+                Session::put('page', 'report/sale-discount');
+                Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
+                Session::put('report_to', Input::has('report_to') ? Input::get('report_to') : (Session::has('report_to') ? Session::get('report_to') : date("Y-m-d")));
+                Session::put('report_customer', Input::has('report_customer') ? Input::get('report_customer') : (Session::has('report_customer') ? Session::get('report_customer') : '-1'));
+                $discount = Order::join('order_details', 'orders.id', '=', 'order_details.order_id');
+                if (Session::get('report_customer') == 0)
+                    $discount = $discount->whereNull('orders.customer_id');
+                elseif (Session::get('report_customer') != -1)
+                    $discount = $discount->where('orders.customer_id', Session::get('report_customer'));
+                $discount = $discount->select(DB::raw("orders.customer_id,sum(((order_details.quantity * order_details.price * (1-order_details.discount/100))*orders.discount/100)+(order_details.quantity * order_details.price * order_details.discount/100)) as total"))
+                    ->whereBetween(DB::raw("date(orders.created_at)"), [date('Y-m-d', strtotime(Session::get('report_from'))), date('Y-m-d', strtotime(Session::get('report_to')))])
+                    ->where('orders.status', 'Completed')
+                    ->where('order_details.deleted_at', NULL)
+        //            ->where('orders.customer_id', '!=', -1)
+                    ->groupBy('orders.customer_id')
+                    ->get();
+                
+            
+        return view('report.daily_summary', ['orders' => $order, 'sale' => $sale,'discount'=>$discount]);
     }
       public function salesTransaction()
     {
@@ -161,6 +180,8 @@ class ReportController extends Controller
     public function viewDetail($id)
     {
         return view('report.view', ['order' => Order::find($id)]);
+        
+        
     }
 
     public function saleDetail()

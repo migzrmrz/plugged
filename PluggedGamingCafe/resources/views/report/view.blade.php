@@ -1,7 +1,7 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title">View Order Detail</h4>
+    <h4 class="modal-title">Order Details</h4>
 </div>
 <div class="modal-body">
     <div class="row">
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th style="text-align: right;border-top: none">Cash in:</th>
-                    <td style="border-top: none">$ {{$order->usd}}</td>
+                    <td style="border-top: none">₱ {{$order->usd}}</td>
                 </tr>
             </table>
         </div>
@@ -41,27 +41,27 @@
             <table class="table" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th width="50px" style="text-align: center">
+                    <th width="50px" style="text-align: left">
                         No
                     </th>
-                    <th> Description</th>
-                    <th> Qty</th>
-                    <th> U.Price</th>
-                    <th> D.C</th>
-                    <th> Total</th>
+                    <th width="50px" style="text-align: left"> Description</th>
+                    <th width="50px" style="text-align: left"> Qty</th>
+                    <th width="50px" style="text-align: left"> Price</th>
+                    <th width="50px" style="text-align: left"> Discount</th>
+                    <th width="50px" style="text-align: left"> Total</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php $total = 0; $i = 1;?>
                 @foreach($order->order_details()->withTrashed()->get() as $sale)
                     <tr @if(!empty($sale->deleted_at)) style="text-decoration: line-through" @endif>
-                        <td style="text-align: center">{{$i++}}
+                        <td style="text-align: left">{{$i++}}
                         </td>
                         <td>{{$sale->description}}</td>
                         <td width="10px">{{$sale->quantity}}</td>
-                        <td align="right" width="40px">₱ {{number_format($sale->price,2)}}</td>
-                        <td align="center" width="30px">{{$sale->discount}}%</td>
-                        <td align="right" width="70px">
+                        <td align="left" width="100px">₱ {{number_format($sale->price,2)}}</td>
+                        <td align="left" width="30px">{{$sale->discount}}%</td>
+                        <td align="left" width="100px">
                             ₱ {{number_format($sale->quantity * $sale->price *(1-$sale->discount/100),2)}}</td>
                     </tr>
                     <?php if (empty($sale->deleted_at)) $total += ($sale->price * $sale->quantity * (1 - $sale->discount / 100)); ?>

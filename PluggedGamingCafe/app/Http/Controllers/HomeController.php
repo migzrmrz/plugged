@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $d1 = strtotime(date("d-M-Y", strtotime("-7 days")));
+        $d1 = strtotime(date("d-M-Y", strtotime("-14 days")));
         $d2 = strtotime(date("d-M-Y"));
         $iv = array();
         $morning = array();
@@ -99,7 +99,7 @@ class HomeController extends Controller
                 ->groupBy(DB::raw("date(orders.created_at)"))
                 ->first();
         }
-            //$sale['Open'] = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
+        //$sale['Open'] = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
             //->select(DB::raw('sum(order_details.quantity * order_details.price-(order_details.quantity * order_details.price*orders.discount/100)) as total'))
             //->where(DB::raw("date(orders.created_at)"), date('Y-m-d', strtotime(Session::get('report_from'))))
             //->whereNull('order_details.product_id')
@@ -110,7 +110,7 @@ class HomeController extends Controller
 
         // Get detail report
         $orderDetails = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
-            ->select(DB::raw("product_id,description,sum(order_details.quantity) as total,price,sum(order_details.quantity * order_details.price*orders.discount/100) as discount"))
+            ->select(DB::raw("product_id,description,sum(order_details.quantity* order_details.price) as total,price,sum(order_details.quantity * order_details.price*orders.discount/100) as discount"))
             //->where(DB::raw("date(orders.created_at)"), date('Y-m-d'))
             ->where('orders.status', 'Completed')
             ->where('order_details.deleted_at', NULL)

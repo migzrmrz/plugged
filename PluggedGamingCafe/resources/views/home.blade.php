@@ -1,7 +1,7 @@
 <div class="row-fluid">
     <h2 class="page-header">Sale Graph Report (15 days)
         <div style="border: 1px double gray;background: whitesmoke;padding: 10px;margin: 0px;text-align: right;float: right">
-            ₱ {{number_format($order['Total']['total'],2)}}
+            Total Daily Sale: ₱ {{number_format($order['Total']['total'],2)}}
         </div>
     </h2>
 
@@ -59,7 +59,7 @@
             x: -20 //center
         },
         subtitle: {
-            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->username)}}',
+            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->fullname)}}',
             x: -20
         },
         xAxis: {

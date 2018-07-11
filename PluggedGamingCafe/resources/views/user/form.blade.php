@@ -13,16 +13,9 @@
         </div>
     </div>
     <div class="form-group required" id="form-username-error">
-        {!! Form::label("firstname","First name",["class"=>"control-label col-md-2"]) !!}
+        {!! Form::label("fullname","Full Name",["class"=>"control-label col-md-2"]) !!}
         <div class="col-md-5">
-            {!! Form::text("firstname",null,["class"=>"form-control required","id"=>"focus"]) !!}
-            <span id="username-error" class="help-block"></span>
-        </div>
-    </div>
-    <div class="form-group required" id="form-username-error">
-        {!! Form::label("lastname","Last name",["class"=>"control-label col-md-2"]) !!}
-        <div class="col-md-5">
-            {!! Form::text("lastname",null,["class"=>"form-control required","id"=>"focus"]) !!}
+            {!! Form::text("fullname",null,["class"=>"form-control required","id"=>"focus"]) !!}
             <span id="username-error" class="help-block"></span>
         </div>
     </div>

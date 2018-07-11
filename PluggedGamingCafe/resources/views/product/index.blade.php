@@ -27,7 +27,7 @@
 <table class="table table-bordered table-striped">
     <thead>
     <tr>
-        <th class="hidden-xs hidden-sm" style="text-align: center">Picture</th>
+
         <th width="80px" style="text-align: center">
             <a href="javascript:ajaxLoad('product?field=id&sort={{Session::get("product_sort")=="asc"?"desc":"asc"}}')">
                 Code
@@ -53,10 +53,7 @@
     <?php $i = 1;?>
     @foreach($products as $key=>$product)
         <tr>
-            <td class="hidden-xs hidden-sm" style="text-align: center">
-                <img src="{{$product->image!='' && File::exists('images/products/'.$product->image)?'/images/products/'.$product->image:'/images/default.jpg'}}"
-                     width="80px" height="70px"/>
-            </td>
+            
             <td align="center" style="vertical-align: middle">{{$product->id}}</td>
             <td style="vertical-align: middle">{{$product->name}}</td>
             <td class="hidden-xs hidden-sm"

@@ -42,7 +42,7 @@
         <th style="text-align: right"> Amount</th>
         <th style="text-align: right"> Discount</th>
         <th style="text-align: right"> Total</th>
-        <th> Customer</th>
+    <!--<th> Customer</th> -->
         <th> Cashier</th>
     </tr>
     </thead>
@@ -61,8 +61,8 @@
             <td align="right">{{$order->discount}}%</td>
             <td align="right">
                 ₱ {{number_format(($amount->total - $amount->discount) * (1-$order->discount/100),2)}}</td>
-            <td>{{$order->customer_id && $order->customer?$order->customer->name:''}}</td>
-            <td>{{$order->user?$order->user->username:''}}</td>
+            <!--<td>{{$order->customer_id && $order->customer?$order->customer->name:''}}</td> -->
+            <td>{{$order->user?$order->user->fullname:''}}</td>
         </tr>
     @endforeach
     </tbody>

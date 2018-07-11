@@ -35,7 +35,7 @@
 <div class="container-fluid" style="background: #4f3558;border-bottom: 5px solid #675682">
     <img src="/images/logo.png" height="70px" width="100px"/><font color= "white"> PLUGGED BOARD GAME CAFE AND GAMING LOUNGE </font>
     <div class="pull-right" style="padding-top: 20px;font-size: 15px">
-    <font color= "white">You are logged in as <b><u>{{ucwords(Auth::user()->firstname)}}</u></b> ( <a href="{{url('/logout')}}" onclick="event.preventDefault();
+    <font color= "white">You are logged in as <b><u>{{ucwords(Auth::user()->fullname)}}</u></b> ( <a href="{{url('/logout')}}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST"
               style="display: none;">
